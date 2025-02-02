@@ -3,14 +3,19 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-
+import rateLimit from 'express-rate-limit'
 // routes
 import { userRouter } from './src/users/user.router.js'
 import { roleRouter } from './src/roles/role.router.js'
-
-
+import helmet from 'helmet'
+import compression from 'compression'
 
 dotenv.config()
+
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 20,
+  });
 
 const app = express()
 //const DB = process.env.DB_STRING
@@ -23,6 +28,9 @@ app.all('*', (req, res) => {
 })
 app.use(cookieParser());
 app.use(cors())
+app.use(limiter)
+app.use(helmet)
+app.use(compression)
 
 // mongosh --host 192.168.1.11:27017 --username extectick --password Ovogup73_ --authenticationDatabase extectick
 // 'mongodb://extectick:Ovogup73_@5.130.93.70:27017/?authMechanism=SCRAM-SHA-256'
