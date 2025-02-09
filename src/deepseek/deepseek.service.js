@@ -14,7 +14,7 @@ export default new class deepSeekService {
             });
 
             const completion = await openai.chat.completions.create({
-                messages: [{ role: "system", content: content }],
+                messages: [{ role: "user", content: content }],
                 model: "deepseek-chat",
             });
 
