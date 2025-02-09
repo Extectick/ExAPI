@@ -15,14 +15,14 @@ router.post(
     '/registration',
     body('username').notEmpty(),
     body('password').notEmpty().isStrongPassword().withMessage({message: "Слабый пароль"}),
-    _userMiddleware.validRegistration, 
+    _userMiddleware.checkErrors, 
     controller.registration)
 
 router.post(
     '/login',
     body('username').notEmpty(),
     body('password').notEmpty(), 
-    _userMiddleware.validLogin,
+    _userMiddleware.checkErrors,
     controller.login)
 
 router.post('/logout', controller.logout)

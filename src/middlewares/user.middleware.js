@@ -4,23 +4,36 @@ import dotenv from 'dotenv';
 
 dotenv.config()
 
+
 export class userMiddleware {
     async validRegistration(req, res, next) {
+        await userMiddleware.checkErrors
+        // const result = validationResult(req);
+
+        // if (!result.isEmpty()) {
+        //     return res.status(400).json({errors: result.array()})
+        // }
+        
+        next()
+    }
+
+    async checkErrors(req, res, next) {
         
         const result = validationResult(req);
-
         if (!result.isEmpty()) {
             return res.status(400).json({errors: result.array()})
         }
         
         next()
     }
-    async validLogin(req, res, next) {
-        const result = validationResult(req);
 
-        if (!result.isEmpty()) {
-            return res.status(400).json({errors: result.array()})
-        }
+    async validLogin(req, res, next) {
+        
+        // const result = validationResult(req);
+
+        // if (!result.isEmpty()) {
+        //     return res.status(400).json({errors: result.array()})
+        // }
 
         next()
     }

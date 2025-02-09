@@ -1,12 +1,10 @@
 import User from './user.model.js'
 import Role from '../roles/role.model.js'
-
+import UserService from './user.service.js'
 // import jwt from 'jsonwebtoken'
 
 import dotenv from 'dotenv'
 
-
-import UserService from './user.service.js'
 
 dotenv.config()
 
